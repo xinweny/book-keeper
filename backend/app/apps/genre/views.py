@@ -2,12 +2,12 @@ from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
-from app.apps.author.models import Author
-from app.apps.author.serializers import AuthorSerializer
+from app.apps.genre.models import Genre
+from app.apps.genre.serializers import GenreSerializer
 
-class AuthorViewSet(ModelViewSet):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
+class GenreViewSet(ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
 
     def list(self, request):
         serializer = self.get_serializer(self.get_queryset(), many=True)
