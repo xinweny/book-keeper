@@ -8,4 +8,4 @@ class Book(Model):
     author: ForeignKey[Author] = ForeignKey(Author, on_delete=CASCADE)
     genre: ForeignKey[Genre] = ForeignKey(Genre, on_delete=CASCADE)
     publication_date: DateField = DateField()
-    isbn: CharField = CharField(unique=True)
+    isbn: CharField = CharField(unique=True, max_length=13)
