@@ -1,24 +1,26 @@
-import { ColumnDef } from '@tanstack/react-table';
+import { Dispatch, SetStateAction } from 'react';
+import { ColumnDef, RowSelectionState } from '@tanstack/react-table';
 import ISBN from 'isbn3';
 
 import { GetBooksResponse } from '../types/get-books-response';
 
 import { formatFullName } from '@/modules/author/utils/format-full-name';
 
-import { useGetBooksQuery } from '../hooks/use-get-books-query';
+import { DataTable } from '@/core/ui/components/data-table';
 
-import { DataTable } from '@/core/components/data-table';
+interface BooksTableProps {
+  books: GetBooksResponse[];
+}
 
-
-export function BooksTable() {
-  const query = useGetBooksQuery<GetBooksResponse[]>();
-
+export function BooksTable({
+  books,
+}: BooksTableProps) {
   return (
     <DataTable
-      data={query.data || []}
+      data={books}
       columns={columns}
     />
-  )
+  );
 }
 
 const columns: ColumnDef<GetBooksResponse>[] = [
