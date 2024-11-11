@@ -4,7 +4,7 @@ from app.apps.book.models import Book
 
 class BookFilter(FilterSet):
     title = CharFilter(lookup_expr='icontains')
-    author__full_name = CharFilter(lookup_expr='icontains', label='Author name')
+    author = CharFilter(field_name='author__full_name', lookup_expr='icontains', label='Author name')
     genre_id = NumberFilter()
     isbn = CharFilter(lookup_expr='exact')
     publication_date_from = DateFilter(field_name='publication_date', lookup_expr='gte')
