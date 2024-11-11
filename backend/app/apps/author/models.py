@@ -3,9 +3,9 @@ from django.db.models import Model, CharField, UniqueConstraint, Value, When, Ca
 from django.db.models.functions import Concat
 
 class Author(Model):
-    first_name: CharField = CharField(max_length=255)
-    middle_name: Optional[CharField] = CharField(null = True, max_length=255)
-    last_name: CharField = CharField(max_length=255)
+    first_name: CharField = CharField(max_length=100, blank=False)
+    middle_name: Optional[CharField] = CharField(null = True, max_length=100, blank=False)
+    last_name: CharField = CharField(max_length=100, blank=False)
 
     class Meta:
         constraints = [
