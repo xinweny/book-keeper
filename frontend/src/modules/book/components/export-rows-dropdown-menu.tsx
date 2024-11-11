@@ -78,7 +78,7 @@ const dropdownMenuOptions = [
       downloadFile({
         data: csvString,
         type: 'text/csv',
-        fileName: `book_inventory.csv`,
+        fileName: 'inventory.csv',
       });
     },
   },
@@ -86,7 +86,11 @@ const dropdownMenuOptions = [
     icon: FileJsonIcon,
     label: 'Export to JSON',
     onClick: (books: GetBooksResponse[]) => {
-
+      downloadFile({
+        data: JSON.stringify({ data: books }),
+        type: 'application/json',
+        fileName: 'inventory.json',
+      });
     },
   },
 ];
