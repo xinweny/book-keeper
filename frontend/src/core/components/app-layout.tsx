@@ -18,9 +18,9 @@ export function AppLayout({
   return (
     <NuqsAdapter>
       <QueryClientProvider client={queryClient}>
-        <div className="flex flex-col min-h-screen w-screen">
+        <div className="flex flex-col min-h-screen max-w-screen overflow-auto">
           <Header />
-          <main className="flex-grow">
+          <main className="flex-grow p-4">
             {children}
           </main>
           <Footer />

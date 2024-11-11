@@ -12,5 +12,5 @@ export interface GetBooksResponse {
   };
   title: string;
   isbn: string;
-  publication_date: Date;
+  publication_date: string;
 }

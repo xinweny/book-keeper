@@ -2,7 +2,7 @@ interface ApiRequestInit extends RequestInit {
   body: any;
 }
 
-export const apiFetch = async (path: string, req?: ApiRequestInit) => {
+export const apiFetch = async <T>(path: string, req?: ApiRequestInit) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/${path}`,
     req
@@ -17,5 +17,7 @@ export const apiFetch = async (path: string, req?: ApiRequestInit) => {
       : undefined
   );
 
-  return res;
+  const data = await res.json();
+
+  return data as T;
 };
