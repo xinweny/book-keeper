@@ -20,4 +20,6 @@ class Book(Model):
             ),
         ],
     )
-    
+
+    def clean(self):
+        self.title = self.title.trim()

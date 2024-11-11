@@ -14,7 +14,15 @@ class Author(Model):
                 name='unique_name'
             )
         ]
-    
+        
+    def clean(self):
+        self.first_name = self.first_name.strip().capitalize()
+        
+        if self.middle_name:
+            self.middle_name = self.first_name.strip().capitalize()
+
+        self.last_name = self.last_name.strip().capitalize()
+
 def full_name_annotation(prefix=''):
     middle_name__isnull = prefix + 'middle_name__isnull'
 
