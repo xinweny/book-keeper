@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { apiFetch } from '@/core/api/utils/api-fetch';
-import { useBooksUrlParams, serializeBooksUrlParams } from './use-books-url-params';
+import { useGetBooksUrlParams, serializeGetBooksUrlParams } from './use-get-books-url-params';
 
 export const useGetBooksQuery = <T>() => {
-  const [params] = useBooksUrlParams();
+  const [params] = useGetBooksUrlParams();
 
   return useQuery({
     queryKey: ['books'],
-    queryFn: () => apiFetch<T>(`books${serializeBooksUrlParams(params)}`),
+    queryFn: () => apiFetch<T>(`books${serializeGetBooksUrlParams(params)}`),
   });
 };

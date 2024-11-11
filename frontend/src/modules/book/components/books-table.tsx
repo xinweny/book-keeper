@@ -27,6 +27,9 @@ const columns: ColumnDef<GetBooksResponse>[] = [
   {
     accessorKey: 'title',
     header: 'Title',
+    cell: ({ row: { original: { title } } }) => (
+      <span className="font-semibold">{title}</span>
+    ),
   },
   {
     header: 'Author',

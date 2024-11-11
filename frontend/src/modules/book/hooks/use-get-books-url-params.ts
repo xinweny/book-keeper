@@ -14,8 +14,8 @@ const parsers = {
   publication_date_to: parseAsIsoDateTime,
 };
 
-export const useBooksUrlParams = () => {
+export const useGetBooksUrlParams = () => {
   return useQueryStates(parsers);
 };
 
-export const serializeBooksUrlParams = createSerializer(parsers);
+export const serializeGetBooksUrlParams = createSerializer(parsers);
