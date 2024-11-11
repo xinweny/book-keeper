@@ -4,15 +4,13 @@ from rest_framework.response import Response
 
 from app.apps.book.models import Book
 from app.apps.book.serializers import BookSerializer
+from app.apps.book.filters import BookFilter
+from app.apps.author.models import full_name_annotation
 
 class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
+    queryset = Book.objects.annotate(author__full_name=full_name_annotation('author__')).all()
     serializer_class = BookSerializer
-
-    def list(self, request):
-        serializer = self.get_serializer(self.get_queryset(), many=True)
-
-        return Response(data=serializer.data)
+    filterset_class = BookFilter
 
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
