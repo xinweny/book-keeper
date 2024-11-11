@@ -5,6 +5,7 @@ import { GetBooksResponse } from '../types/get-books-response';
 import { useGetBooksQuery } from '../hooks/use-get-books-query';
 
 import { BooksTable } from './books-table';
+import { PaginationInfo } from '@/modules/book/components/pagination-info';
 import { ExportRowsDropdownMenu } from './export-rows-dropdown-menu';
 
 export function InventoryPage() {
@@ -18,7 +19,10 @@ export function InventoryPage() {
         <div></div>
         <ExportRowsDropdownMenu books={books} />
       </div>
-      <BooksTable books={books} />
+      <div>
+        <BooksTable books={books} />
+        <PaginationInfo totalCount={books.length} />
+      </div>
     </div>
   );
 }

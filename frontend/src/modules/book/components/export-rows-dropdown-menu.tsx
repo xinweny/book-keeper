@@ -32,6 +32,7 @@ export function ExportRowsDropdownMenu({
           variant="outline"
         >
           <PrinterIcon />
+          <span className="hidden sm:block">Export Table</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
