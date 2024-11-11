@@ -6,12 +6,15 @@ import {
 
 import { GetBooksResponse } from '../types/get-books-response';
 
+import { downloadFile } from '@/lib/download-file';
+import { convertToCsv } from '@/lib/convert-to-csv';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
-import { DropdownMenuItem } from '@/core/ui/components/dropdown-menu-item';
 import { Button } from '@/components/ui/button';
 
 interface ExportRowsDropdownMenuProps {
@@ -32,16 +35,22 @@ export function ExportRowsDropdownMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {dropdownMenuOptions.map(({ icon, label, onClick }) => (
-          <DropdownMenuItem
-            key={label}
-            icon={icon}
-            label={label}
-            onClick={() => {
-              onClick(books);
-            }}
-          />
-        ))}
+        {dropdownMenuOptions.map(({ icon, label, onClick }) => {
+          const Icon = icon;
+
+          return (
+            <DropdownMenuItem
+              key={label}
+              onClick={() => {
+                onClick(books);
+              }}
+              className="flex items-center gap-2"
+            >
+              <Icon />
+              <span>{label}</span>
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -52,7 +61,25 @@ const dropdownMenuOptions = [
     icon: FileSpreadsheetIcon,
     label: 'Export to CSV',
     onClick: (books: GetBooksResponse[]) => {
+      const csvData = [
+        ['id', 'title', 'author', 'genre', 'isbn13', 'publication_date'],
+        ...(books.map(book => [
+          book.id.toString(),
+          book.title,
+          `${book.author.first_name} ${book.author.middle_name ? `${book.author.middle_name} ` : ''}${book.author.last_name}`,
+          book.genre.name,
+          book.isbn,
+          book.publication_date,
+        ])),
+      ];
 
+      const csvString = convertToCsv(csvData);
+
+      downloadFile({
+        data: csvString,
+        type: 'text/csv',
+        fileName: `book_inventory.csv`,
+      });
     },
   },
   {
