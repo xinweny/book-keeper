@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookPlusIcon, LibraryBigIcon } from 'lucide-react';
+import { PlusIcon, LibraryBigIcon } from 'lucide-react';
 
 import { buttonVariants } from '@/components/ui/button';
 
@@ -17,7 +17,7 @@ export function Header() {
         href="/new"
         className={buttonVariants({ variant: 'default' })}
       >
-        <BookPlusIcon />
+        <PlusIcon />
         <span className="font-semibold">Add Book</span>
       </Link>
     </header>
