@@ -16,19 +16,20 @@ class Command(BaseCommand):
         fake = Faker()
         
         # Create authors
-        authors: list[Author] = []
+        authors = []
         
-        for i in range(20):
+        for _ in range(20):
             first_name = fake.first_name()
             middle_name = None if random.uniform(0, 1) > 0.2 else fake.first_name() # 20% chance to have middle name
             last_name = fake.last_name()
             
             authors.append(Author(
-                id=i + 1,
                 first_name=first_name,
                 middle_name=middle_name,
                 last_name=last_name
             ))
+        
+        authors = Author.objects.bulk_create(authors)
 
         # Create genres
         genre_names = [
@@ -50,7 +51,9 @@ class Command(BaseCommand):
             'Travel',
             'True Crime',
         ]
-        genres: list[Genre] = [Genre(id=i + 1, name=n) for i, n in enumerate(genre_names)]
+        genres: list[Genre] = [Genre(name=n) for n in genre_names]
+
+        genres = Genre.objects.bulk_create(genres)
             
         # Create books
         book_genre_titles = [
@@ -133,17 +136,13 @@ class Command(BaseCommand):
         ]
 
         books = [Book(
-            id=i + 1,
             title=book[1],
             author_id=authors[random.randint(0, len(authors) - 1)].id,
             genre_id=book[0] + 1,
             publication_date=fake.date_between(date(1980, 1, 1), date.today()),
             isbn=fake.isbn13(separator='')
-        ) for i, book in enumerate(book_genre_titles)]
-            
-        # Save to database
-        Author.objects.bulk_create(authors)
-        Genre.objects.bulk_create(genres)
-        Book.objects.bulk_create(books)
+        ) for book in book_genre_titles]
+        
+        books = Book.objects.bulk_create(books)
         
         self.stdout.write(self.style.SUCCESS('Seeding complete.'))
