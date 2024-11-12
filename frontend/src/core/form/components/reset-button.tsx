@@ -15,12 +15,13 @@ export function ResetButton<T extends FieldValues>({
 
   return (
     <Button
-      {...props}
       type="button"
       variant="destructive"
+      
       onClick={() => {
         reset(defaultValues);
       }}
+      {...props}
     >
       {children}
     </Button>

@@ -4,13 +4,17 @@ import { GetAuthorsResponse } from '../types/get-authors-response';
 
 import { apiFetch } from '@/core/api/utils/api-fetch';
 
-import { useGetAuthorsUrlParams, serializeGetAuthorsUrlParams } from './use-get-authors-url-params';
+import { useGetAuthorsUrlParams } from './use-get-authors-url-params';
 
 export const useGetAuthorsQuery = () => {
   const [params] = useGetAuthorsUrlParams();
 
+  const urlSearchParams = new URLSearchParams({
+    name: params.authorName || '',
+  });
+
   return useQuery({
     queryKey: ['authors'],
-    queryFn: () => apiFetch<GetAuthorsResponse[]>(`authors${serializeGetAuthorsUrlParams(params)}`),
+    queryFn: () => apiFetch<GetAuthorsResponse[]>(`authors?${urlSearchParams.toString()}`),
   });
 };

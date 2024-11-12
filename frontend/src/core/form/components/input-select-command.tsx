@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FieldValues, useFormContext, Path, PathValue } from 'react-hook-form';
+import { FieldValues, Path, PathValue } from 'react-hook-form';
 
 import { Check, ChevronsUpDown } from 'lucide-react';
 
@@ -34,6 +34,8 @@ interface InputSelectCommandProps<T> {
   label: string;
   isLoading?: boolean;
   emptyPlaceholder?: React.ReactNode;
+  query: string;
+  setQuery: (value: string) => void;
 }
 
 export function InputSelectCommand<T extends FieldValues>({
@@ -44,9 +46,10 @@ export function InputSelectCommand<T extends FieldValues>({
   placeholder = 'Search',
   isLoading = false,
   emptyPlaceholder = 'No results found.',
+  query,
+  setQuery,
 }: InputSelectCommandProps<T>) {
   const [open, setOpen] = useState<boolean>(false);
-  const [query, setQuery] = useState<string>('');
 
   useEffect(() => {
     setQuery('');

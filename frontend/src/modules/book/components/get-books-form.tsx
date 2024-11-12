@@ -1,15 +1,19 @@
 'use client';
 
-import { useForm, Path } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { GetBooksSchema, getBooksSchemaResolver } from '../schema/get-books-schema';
+
+import { useGetBooksUrlParams } from '../hooks/use-get-books-url-params';
 
 import { Form } from '@/core/form/components/form';
 import { FormField } from '@/core/form/components/form-field';
 import { Input } from '@/core/form/components/input';
 import { InputDateRange } from '@/core/form/components/input-date-range';
-import { InputSelectCommand } from '@/core/form/components/input-select-command';
-import { useGetAuthorsQuery } from '@/modules/author/hooks/use-get-authors-query';
+
+import { InputAuthorSelect } from '@/modules/author/components/input-author-select';
+import { InputGenreSelect } from '@/modules/genre/components/input-genre-select';
+import { ResetButton } from '@/core/form/components/reset-button';
 
 const defaultValues = {
   title: undefined,
@@ -23,12 +27,12 @@ const defaultValues = {
 };
 
 export function GetBooksForm() {
+  const [params, setParams] = useGetBooksUrlParams();
+
   const form = useForm<GetBooksSchema>({
     defaultValues,
     resolver: getBooksSchemaResolver,
   });
-
-  const q = useGetAuthorsQuery();
 
   const onSubmit = async () => {
 
@@ -54,10 +58,9 @@ export function GetBooksForm() {
         name="authorId"
         label="Author"
         render={({ value, onChange }) => (
-          <InputSelectCommand
+          <InputAuthorSelect
             value={value}
             onSelect={onChange}
-            label="Select Author"
           />
         )}
       />
@@ -65,10 +68,9 @@ export function GetBooksForm() {
         name="genreId"
         label="Genre"
         render={({ value, onChange }) => (
-          <InputSelectCommand
+          <InputGenreSelect
             value={value}
             onSelect={onChange}
-            label="Select Genre"
           />
         )}
       />
@@ -94,6 +96,11 @@ export function GetBooksForm() {
           />
         )}
       />
+      <div>
+        <ResetButton
+          defaultValues={defaultValues}
+        />
+      </div>
     </Form>
   );
 }

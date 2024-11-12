@@ -5,7 +5,7 @@ import {
 } from 'nuqs';
 
 const parsers = {
-  name: parseAsString,
+  authorName: parseAsString.withDefault(''),
 };
 
 export const useGetAuthorsUrlParams = () => {
