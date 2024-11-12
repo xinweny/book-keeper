@@ -46,10 +46,10 @@ export function FormField<T extends FieldValues>({
           {description && (
             <FormDescription>{description}</FormDescription>
           )}
+          <FormMessage />
           <FormControl>
             {render(field)}
           </FormControl>
-          <FormMessage />
         </FormItem>
       )}
     />

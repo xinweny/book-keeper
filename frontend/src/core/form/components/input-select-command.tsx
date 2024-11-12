@@ -64,7 +64,8 @@ export function InputSelectCommand<T extends FieldValues>({
           <span className="w-auto overflow-hidden flex-auto text-ellipsis">
             {value
               ? options.find(({ value: v }) => value === v)?.label || ''
-              : label}
+              : label
+            }
           </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -82,7 +83,8 @@ export function InputSelectCommand<T extends FieldValues>({
             <CommandEmpty>
               {isLoading
                 ? 'Loading...'
-                : emptyPlaceholder}
+                : emptyPlaceholder
+              }
             </CommandEmpty>
             <CommandGroup>
               {options.map(({ value: v, label, key }) => (
