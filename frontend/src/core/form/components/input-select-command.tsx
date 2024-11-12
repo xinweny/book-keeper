@@ -29,7 +29,7 @@ interface InputSelectCommandProps<T> {
     label: string;
   }[];
   value: PathValue<T, Path<T>>;
-  onSelect: (value: PathValue<T, Path<T>>) => void;
+  onSelect: (value: PathValue<T, Path<T>> | undefined) => void;
   placeholder?: string;
   label: string;
   isLoading?: boolean;
@@ -54,6 +54,8 @@ export function InputSelectCommand<T extends FieldValues>({
   useEffect(() => {
     setQuery('');
   }, [value]);
+
+  console.log(value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -95,7 +97,10 @@ export function InputSelectCommand<T extends FieldValues>({
                   key={key}
                   value={key}
                   onSelect={() => {
-                    onSelect(v);
+                    onSelect(value === v
+                      ? undefined
+                      : v
+                    );
                     setOpen(false);
                   }}
                 >
