@@ -3,7 +3,7 @@ from django_filters import FilterSet, CharFilter
 from app.apps.author.models import Author
 
 class AuthorFilter(FilterSet):
-    full_name = CharFilter(method='author_name_filter', label='Name')
+    name = CharFilter(field_name='full_name', lookup_expr='icontains', label='Name')
 
     class Meta:
         model = Author
