@@ -1,16 +1,19 @@
 FROM python:3.13-slim AS base
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y curl libpq-dev python3-dev gcc \
+    && apt-get install --no-install-recommends -y \
+    curl libpq-dev python3-dev gcc \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install poetry
+ENV POETRY_HOME=/opt/poetry
+ENV PATH=${POETRY_HOME}/bin:${PATH}
 
-ENV POETRY_NO_INTERACTION 1
-ENV POETRY_VIRTUALENVS_IN_PROJECT 1
-ENV POETRY_VIRTUALENVS_CREATE 1
-ENV POETRY_CACHE_DIR /tmp/poetry_cache
+RUN curl -sSL https://install.python-poetry.org | python3 - && poetry --version
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV POETRY_NO_INTERACTION=1
+ENV POETRY_VIRTUALENVS_IN_PROJECT=1
 
 FROM base AS builder
 
@@ -18,26 +21,15 @@ WORKDIR /app
 
 COPY poetry.lock pyproject.toml ./
 
-RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
+RUN poetry install --no-root
 
 FROM base AS runner
 
 WORKDIR /app
+
 COPY --from=builder /app/.venv/ /app/.venv/
 
 COPY . /app
-
-FROM runner AS development
-
-WORKDIR /app
-
-EXPOSE 8000
-
-ENTRYPOINT ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-FROM runner AS production
-
-WORKDIR /app
 
 # Set user and group
 ARG user=django
@@ -53,6 +45,8 @@ RUN chown -R ${uid}:${gid} /app
 
 USER ${uid}:${gid}
 
+ENV ENVIRONMENT=production
+
 EXPOSE 8000
 
-ENTRYPOINT ["poetry", "run", "gunicorn", "-c",  "gunicorn.conf.py"]
+ENTRYPOINT ["poetry", "run", "gunicorn", "main:src"]

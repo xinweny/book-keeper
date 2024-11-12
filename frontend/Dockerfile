@@ -26,33 +26,25 @@ COPY . .
 
 RUN npm run build
 
-# Development image
-FROM builder AS development
-
-WORKDIR /app
-
-EXPOSE 3000
-
-ENTRYPOINT ["npm", "run", "dev"]
-
-# Production image, copy all the files and run next
-FROM builder AS production
+# 3. Production image, copy all the files and run next
+FROM base AS runner
 
 WORKDIR /app
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/out ./public
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+# COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-ENV HOSTNAME "0.0.0.0"
+ENV NODE_ENV=production
+ENV HOSTNAME="0.0.0.0"
 
 EXPOSE 3000
 

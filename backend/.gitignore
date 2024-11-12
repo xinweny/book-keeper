@@ -87,4 +87,5 @@ local_settings.py
 .mypy_cache
 
 .env
+.venv
 db.sqlite3
