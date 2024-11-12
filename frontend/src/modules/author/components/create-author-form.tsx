@@ -36,7 +36,7 @@ export function CreateAuthorForm() {
     
 
     if (isSuccess) {
-      toast.success('Book successfully created.');
+      toast.success('Author successfully created.');
       form.reset(defaultValues);
     }
   };
