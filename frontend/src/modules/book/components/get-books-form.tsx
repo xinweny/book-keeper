@@ -23,8 +23,8 @@ export function GetBooksForm() {
 
   const form = useForm<GetBooksSchema>({
     defaultValues: {
-      title: params.title || undefined,
-      isbn: params.isbn || undefined,
+      title: params.title || '',
+      isbn: params.isbn || '',
       authorId: params.authorId || undefined,
       genreId: params.genreId || undefined,
       publicationDate: {
@@ -44,6 +44,8 @@ export function GetBooksForm() {
       publicationDateFrom: data.publicationDate.from,
       publicationDateTo: data.publicationDate.to,
     });
+
+    console.log('submitted');
 
     await refetch();
   };
@@ -110,8 +112,8 @@ export function GetBooksForm() {
         <ResetButton
           className="flex-grow"
           defaultValues={{
-            title: undefined,
-            isbn: undefined,
+            title: '',
+            isbn: '',
             authorId: undefined,
             genreId: undefined,
             publicationDate: {

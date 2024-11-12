@@ -10,7 +10,7 @@ export function BookFiltersButton() {
   return (
     <DialogDrawer
       trigger={
-        <Button variant="secondary">
+        <Button type="button" variant="secondary">
           <FilterIcon />
           <span>Filter</span>
         </Button>

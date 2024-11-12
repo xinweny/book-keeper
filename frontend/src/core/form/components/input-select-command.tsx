@@ -55,8 +55,6 @@ export function InputSelectCommand<T extends FieldValues>({
     setQuery('');
   }, [value]);
 
-  console.log(value);
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
