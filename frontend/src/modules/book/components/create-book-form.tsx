@@ -37,12 +37,12 @@ export function CreateBookForm() {
   const onSubmit = async (data: CreateBookSchema) => {
     await createBook({
       title: data.title,
-      author_id: data.authorId,
-      genre_id: data.genreId,
+      author: data.authorId,
+      genre: data.genreId,
       isbn: ISBN.asIsbn13(data.isbn),
       publication_date: format(data.publicationDate, 'yyyy-LL-dd'),
     });
-    
+
     if (isSuccess) {
       toast.success('Book successfully created.');
       form.reset(defaultValues);
