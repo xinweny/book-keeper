@@ -3,6 +3,7 @@
 import { TabPanels } from '../components/tab-panels';
 
 import { CreateBookForm } from '@/modules/book/components/create-book-form';
+import { CreateAuthorForm } from '@/modules/author/components/create-author-form';
 
 export function CreateEntriesPage() {
   return (
@@ -15,13 +16,13 @@ export function CreateEntriesPage() {
             value: 'book',
             label: 'Book',
             title: 'Create Book',
-            content: <CreateBookForm />
+            content: <CreateBookForm />,
           },
           {
             value: 'author',
             label: 'Author',
             title: 'Create Author',
-            content: <></>
+            content: <CreateAuthorForm />,
           },
           {
             value: 'genre',
