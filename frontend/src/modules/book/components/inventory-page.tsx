@@ -9,9 +9,9 @@ import { PaginationInfo } from '@/modules/book/components/pagination-info';
 import { ExportRowsDropdownMenu } from './export-rows-dropdown-menu';
 
 export function InventoryPage() {
-  const query = useGetBooksQuery<GetBooksResponse[]>();
+  const { data } = useGetBooksQuery();
 
-  const books = query.data || [];
+  const books = data || [];
 
   return (
     <div>
