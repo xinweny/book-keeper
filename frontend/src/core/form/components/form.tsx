@@ -5,6 +5,7 @@ import { cn } from '@/lib/cn';
 import { Form as F } from '@/components/ui/form';
 
 interface FormProps<T extends FieldValues> {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   form: UseFormReturn<T, any, undefined>
   children: React.ReactNode;
   onSubmit: (data: T) => void;

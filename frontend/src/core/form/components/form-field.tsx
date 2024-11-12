@@ -19,6 +19,7 @@ import {
 
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   render: (field: ControllerRenderProps<T, Path<T>>) => ReactElement<any, string | JSXElementConstructor<any>>;
   label?: string;
   description?: string;

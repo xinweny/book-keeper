@@ -1,7 +1,8 @@
 import { ServerError } from '../types/server-error';
 
 interface ApiRequestInit extends RequestInit {
-  body: any;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  body?: any; 
 }
 
 export const apiFetch = async <T>(

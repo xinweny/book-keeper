@@ -1,16 +1,16 @@
-FROM python:3.12-slim AS base
+FROM python:3.13-slim AS base
 
 ENV POETRY_HOME=/opt/poetry
 ENV PATH=${POETRY_HOME}/bin:${PATH}
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y curl \
+    && apt-get install --no-install-recommends -y curl libpq-dev python3-dev gcc \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSL https://install.python-poetry.org | python3 - && poetry --version
 
-FROM base as builder
+FROM base AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ COPY poetry.lock pyproject.toml ./
 RUN poetry config virtualenvs.in-project true
 RUN poetry install --only main --no-interaction
 
-FROM base as runner
+FROM base AS runner
 
 WORKDIR /app
 COPY --from=builder /app/.venv/ /app/.venv/
@@ -28,13 +28,13 @@ COPY . /app
 
 EXPOSE 8000
 
-RUN chmod +x /app/src/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 FROM runner AS development
 
 WORKDIR /app/src
 
-ENTRYPOINT ["/app/src/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 FROM runner AS production
 
@@ -45,6 +45,7 @@ ARG user=django
 ARG group=django
 ARG uid=1000
 ARG gid=1000
+
 RUN groupadd -g ${gid} ${group}
 RUN useradd -u ${uid} -g ${group} -s /bin/sh -m ${user}
 
@@ -53,4 +54,4 @@ RUN chown -R ${uid}:${gid} /app
 
 USER ${uid}:${gid}
 
-ENTRYPOINT ENTRYPOINT ["/app/src/entrypoint.sh"]
+ENTRYPOINT ENTRYPOINT ["/app/entrypoint.sh"]

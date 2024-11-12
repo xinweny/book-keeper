@@ -40,7 +40,6 @@ services:
     image: book-keeper/client
     build:
       context: ./frontend
-      target: ${ENVIRONMENT}
     environment:
       - NODE_ENV=${ENVIRONMENT}
       - API_URL=http://api:8000/api
