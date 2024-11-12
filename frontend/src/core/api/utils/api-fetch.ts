@@ -17,5 +17,7 @@ export const apiFetch = async <T>(path: string, req?: ApiRequestInit) => {
       : undefined
   );
 
-  return res.json() as T | undefined;
+  const data = res.json() as T | undefined;
+
+  return data;
 };

@@ -1,15 +1,22 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions, useQueryClient } from '@tanstack/react-query';
 
 import { CreateGenreRequest } from '../types/create-genre-request';
 
 import { apiFetch } from '@/core/api/utils/api-fetch';
 
-export const useCreateGenreMutation = () => {
+export const useCreateGenreMutation = (options?: UseMutationOptions<unknown, Error, CreateGenreRequest, unknown>) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['genres'],
+    ...options,
     mutationFn: (body: CreateGenreRequest) => apiFetch('genres/', {
       method: 'POST',
       body,
     }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: ['genres'] });
+
+      if (options?.onSuccess) options?.onSuccess(data, variables, context);
+    },
   });
 };

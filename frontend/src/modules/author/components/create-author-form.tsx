@@ -19,8 +19,12 @@ const defaultValues = {
 export function CreateAuthorForm() {
   const {
     mutateAsync: createAuthor,
-    isSuccess,
-  } = useCreateAuthorMutation();
+  } = useCreateAuthorMutation({
+    onSuccess: () => {
+      toast.success('Author successfully created.');
+      form.reset(defaultValues);
+    },
+  });
 
   const form = useForm<CreateAuthorSchema>({
     defaultValues,
@@ -33,11 +37,6 @@ export function CreateAuthorForm() {
       middle_name: data.middleName || null,
       last_name: data.lastName,
     });
-    
-    if (isSuccess) {
-      toast.success('Author successfully created.');
-      form.reset(defaultValues);
-    }
   };
 
   return (

@@ -1,15 +1,22 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient, UseMutationOptions } from '@tanstack/react-query';
 
 import { CreateAuthorRequest } from '../types/create-author-request';
 
 import { apiFetch } from '@/core/api/utils/api-fetch';
 
-export const useCreateAuthorMutation = () => {
+export const useCreateAuthorMutation = (options?: UseMutationOptions<unknown, Error, CreateAuthorRequest, unknown>) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['authors'],
+    ...options,
     mutationFn: (body: CreateAuthorRequest) => apiFetch('authors/', {
       method: 'POST',
       body,
     }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: ['authors'] });
+
+      if (options?.onSuccess) options?.onSuccess(data, variables, context);
+    },
   });
 };

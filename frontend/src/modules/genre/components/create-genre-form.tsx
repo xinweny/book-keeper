@@ -17,8 +17,12 @@ const defaultValues = {
 export function CreateGenreForm() {
   const {
     mutateAsync: createGenre,
-    isSuccess,
-  } = useCreateGenreMutation();
+  } = useCreateGenreMutation({
+    onSuccess: () => {
+      toast.success('Book successfully created.');
+      form.reset(defaultValues);
+    },
+  });
 
   const form = useForm<CreateGenreSchema>({
     defaultValues,
@@ -27,11 +31,6 @@ export function CreateGenreForm() {
 
   const onSubmit = async (data: CreateGenreSchema) => {
     await createGenre(data);
-
-    if (isSuccess) {
-      toast.success('Genre successfully created.');
-      form.reset(defaultValues);
-    }
   };
 
   return (

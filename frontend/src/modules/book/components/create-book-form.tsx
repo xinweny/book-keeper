@@ -26,8 +26,12 @@ const defaultValues = {
 export function CreateBookForm() {
   const {
     mutateAsync: createBook,
-    isSuccess,
-  } = useCreateBookMutation();
+  } = useCreateBookMutation({
+    onSuccess: () => {
+      toast.success('Book successfully created.');
+      form.reset(defaultValues);
+    },
+  });
 
   const form = useForm<CreateBookSchema>({
     defaultValues,
@@ -42,11 +46,6 @@ export function CreateBookForm() {
       isbn: ISBN.asIsbn13(data.isbn),
       publication_date: format(data.publicationDate, 'yyyy-LL-dd'),
     });
-
-    if (isSuccess) {
-      toast.success('Book successfully created.');
-      form.reset(defaultValues);
-    }
   };
 
   return (
