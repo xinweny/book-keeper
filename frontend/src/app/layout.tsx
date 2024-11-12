@@ -29,7 +29,7 @@ export default function RootLayout({
         <meta name="description" content="Take home assignment for a book inventory management app" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-screen min-h-screen`}
       >
         <AppLayout>
           {children}
