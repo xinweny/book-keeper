@@ -61,12 +61,14 @@ export function DialogDrawer({
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className="text-left">
-            <DrawerTitle>{trigger}</DrawerTitle>
-            <DrawerDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DrawerDescription>
+            <DrawerTitle>{title}</DrawerTitle>
+            {description && (<DrawerDescription>
+              {description}
+            </DrawerDescription>)}
           </DrawerHeader>
-          {children}
+          <div className="p-4">
+            {children}
+          </div>
         </DrawerContent>
       </Drawer>
     );

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { GetBooksSchema, getBooksSchemaResolver } from '../schema/get-books-schema';
 
 import { useGetBooksUrlParams } from '../hooks/use-get-books-url-params';
+import { useGetBooksQuery } from '../hooks/use-get-books-query';
 
 import { Form } from '@/core/form/components/form';
 import { FormField } from '@/core/form/components/form-field';
@@ -14,35 +15,43 @@ import { InputDateRange } from '@/core/form/components/input-date-range';
 import { InputAuthorSelect } from '@/modules/author/components/input-author-select';
 import { InputGenreSelect } from '@/modules/genre/components/input-genre-select';
 import { ResetButton } from '@/core/form/components/reset-button';
-
-const defaultValues = {
-  title: undefined,
-  isbn: undefined,
-  authorId: undefined,
-  genreId: undefined,
-  publicationDate: {
-    from: undefined,
-    to: undefined,
-  },
-};
+import { SubmitButton } from '@/core/form/components/submit-button';
 
 export function GetBooksForm() {
+  const { refetch } = useGetBooksQuery();
   const [params, setParams] = useGetBooksUrlParams();
 
   const form = useForm<GetBooksSchema>({
-    defaultValues,
+    defaultValues: {
+      title: params.title || undefined,
+      isbn: params.isbn || undefined,
+      authorId: params.authorId || undefined,
+      genreId: params.genreId || undefined,
+      publicationDate: {
+        from: params.publicationDateFrom || undefined,
+        to: params.publicationDateTo || undefined,
+      },
+    },
     resolver: getBooksSchemaResolver,
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: GetBooksSchema) => {
+    setParams({
+      title: data.title,
+      isbn: data.isbn,
+      authorId: data.authorId,
+      genreId: data.genreId,
+      publicationDateFrom: data.publicationDate.from,
+      publicationDateTo: data.publicationDate.to,
+    });
 
+    await refetch();
   };
 
   return (
     <Form
       form={form}
       onSubmit={onSubmit}
-      className="flex flex-wrap gap-2 items-center"
     >
       <FormField
         name="title"
@@ -82,12 +91,13 @@ export function GetBooksForm() {
             value={value}
             onChange={onChange}
             maxLength={17}
+            placeholder='978-1-4028-9462-6'
           />
         )}
       />
       <FormField
         name="publicationDate"
-        label="Publication Date"
+        label="Publication Date Range"
         render={({ value, onChange }) => (
           <InputDateRange
             value={value}
@@ -96,10 +106,25 @@ export function GetBooksForm() {
           />
         )}
       />
-      <div>
+      <div className="flex gap-2">
         <ResetButton
-          defaultValues={defaultValues}
+          className="flex-grow"
+          defaultValues={{
+            title: undefined,
+            isbn: undefined,
+            authorId: undefined,
+            genreId: undefined,
+            publicationDate: {
+              from: undefined,
+              to: undefined,
+            },
+          }}
         />
+        <SubmitButton
+          className="flex-grow"
+        >
+          Submit
+        </SubmitButton>
       </div>
     </Form>
   );

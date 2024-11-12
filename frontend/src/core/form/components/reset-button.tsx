@@ -11,13 +11,12 @@ export function ResetButton<T extends FieldValues>({
   children = 'Reset',
   ...props
 }: ResetButtonProps<T>) {
-  const { reset } = useFormContext();
+  const { reset } = useFormContext<T>();
 
   return (
     <Button
       type="button"
-      variant="destructive"
-      
+      variant="secondary"
       onClick={() => {
         reset(defaultValues);
       }}

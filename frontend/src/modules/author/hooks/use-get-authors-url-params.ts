@@ -12,4 +12,8 @@ export const useGetAuthorsUrlParams = () => {
   return useQueryStates(parsers);
 };
 
-export const serializeGetAuthorsUrlParams = createSerializer(parsers);
+export const serializeGetAuthorsUrlParams = createSerializer(parsers, {
+  urlKeys: {
+    authorName: 'name',
+  },
+});

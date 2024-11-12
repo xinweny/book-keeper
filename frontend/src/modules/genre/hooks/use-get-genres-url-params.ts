@@ -12,4 +12,8 @@ export const useGetGenresUrlParams = () => {
   return useQueryStates(parsers);
 };
 
-export const serializeGetGenresUrlParams = createSerializer(parsers);
+export const serializeGetGenresUrlParams = createSerializer(parsers, {
+  urlKeys: {
+    genreName: 'name',
+  },
+});

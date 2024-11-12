@@ -1,12 +1,12 @@
 'use client';
 
-import { GetBooksResponse } from '../types/get-books-response';
-
 import { useGetBooksQuery } from '../hooks/use-get-books-query';
 
-import { BooksTable } from './books-table';
 import { PaginationInfo } from '@/modules/book/components/pagination-info';
+
+import { BooksTable } from './books-table';
 import { ExportRowsDropdownMenu } from './export-rows-dropdown-menu';
+import { BookFiltersButton } from './book-filters-button';
 
 export function InventoryPage() {
   const { data } = useGetBooksQuery();
@@ -16,7 +16,7 @@ export function InventoryPage() {
   return (
     <div>
       <div className="flex items-end justify-between flex-wrap gap-2 mb-2">
-        <div></div>
+        <BookFiltersButton />
         <ExportRowsDropdownMenu books={books} />
       </div>
       <div>
