@@ -1,14 +1,15 @@
 'use client';
 
-import { useGetBooksQuery } from '../hooks/use-get-books-query';
+import { useGetBooksQuery } from '@/modules/book/hooks/use-get-books-query';
 
-import { PaginationInfo } from '@/modules/book/components/pagination-info';
 
-import { BooksTable } from './books-table';
-import { ExportRowsDropdownMenu } from './export-rows-dropdown-menu';
-import { BookFiltersButton } from './book-filters-button';
+import { PaginationInfo } from '@/core/ui/components/pagination-info';
 
-export function InventoryPage() {
+import { BooksTable } from '@/modules/book/components/books-table';
+import { ExportRowsDropdownMenu } from '@/modules/book/components/export-rows-dropdown-menu';
+import { BookFiltersButton } from '@/modules/book/components/book-filters-button';
+
+export function GetBooksPage() {
   const { data } = useGetBooksQuery();
 
   const books = data || [];

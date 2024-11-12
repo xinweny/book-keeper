@@ -1,7 +1,9 @@
-import type { Metadata } from 'next';
+'use client';
+
+import Head from 'next/head';
 import localFont from 'next/font/local';
 
-import { AppLayout } from '@/core/ui/components/app-layout';
+import { AppLayout } from '@/core/ui/layouts/app-layout';
 
 import '@/styles/globals.css';
 
@@ -16,11 +18,6 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
-export const metadata: Metadata = {
-  title: 'Book Keeper',
-  description: 'Take home assignment for a book inventory management app',
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <title>Book Keeper</title>
+        <meta name="description" content="Take home assignment for a book inventory management app" />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

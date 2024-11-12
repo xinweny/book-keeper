@@ -1,10 +1,8 @@
-'use client';
-
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { Header } from './header';
-import { Footer } from './footer';
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
 
 interface AppLayoutProps {
   children: React.ReactNode;

@@ -18,7 +18,7 @@ export function Header() {
         className={buttonVariants({ variant: 'default' })}
       >
         <PlusIcon />
-        <span className="font-semibold">Add Book</span>
+        <span className="font-semibold">Add Entries</span>
       </Link>
     </header>
   );

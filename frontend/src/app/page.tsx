@@ -1,3 +1,3 @@
-import { InventoryPage } from '@/modules/book/components/inventory-page';
+import { GetBooksPage } from '@/core/ui/pages/get-books-page';
 
-export default InventoryPage;
+export default GetBooksPage;
