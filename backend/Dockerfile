@@ -28,17 +28,15 @@ COPY . /app
 
 EXPOSE 8000
 
-RUN chmod +x /app/entrypoint.sh
-
 FROM runner AS development
 
-WORKDIR /app/src
+WORKDIR /app
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 FROM runner AS production
 
-WORKDIR /app/src
+WORKDIR /app
 
 # Set user and group
 ARG user=django
@@ -54,4 +52,4 @@ RUN chown -R ${uid}:${gid} /app
 
 USER ${uid}:${gid}
 
-ENTRYPOINT ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["poetry", "run", "gunicorn", "-c",  "gunicorn.conf.py"]

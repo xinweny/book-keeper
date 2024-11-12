@@ -24,10 +24,19 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+EXPOSE 3000
+
 RUN npm run build
 
-# 3. Production image, copy all the files and run next
-FROM base AS runner
+# Development image
+FROM builder AS development
+
+WORKDIR /app
+
+ENTRYPOINT ["npm", "run", "dev"]
+
+# Production image, copy all the files and run next
+FROM builder AS production
 
 WORKDIR /app
 
@@ -43,6 +52,4 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-EXPOSE 3000
-
-CMD HOSTNAME="0.0.0.0" node server.js
+ENTRYPOINT ["HOSTNAME='0.0.0.0'", "node", "server.js"]

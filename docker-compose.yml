@@ -32,14 +32,15 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./app/src
+          path: ./backend/src
           target: /app/src
         - action: rebuild
-          path: pyproject.toml
+          path: ./backend/pyproject.toml
   frontend:
     image: book-keeper/client
     build:
       context: ./frontend
+      target: ${ENVIRONMENT}
     environment:
       - NODE_ENV=${ENVIRONMENT}
       - API_URL=http://api:8000/api
@@ -51,3 +52,11 @@ services:
       - 3000:3000
     depends_on:
       - backend
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend/src
+          target: /app/src
+        - action: rebuild
+          path: ./frontend/package.json
+          target: /app
