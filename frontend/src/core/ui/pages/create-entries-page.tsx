@@ -4,6 +4,7 @@ import { TabPanels } from '../components/tab-panels';
 
 import { CreateBookForm } from '@/modules/book/components/create-book-form';
 import { CreateAuthorForm } from '@/modules/author/components/create-author-form';
+import { CreateGenreForm } from '@/modules/genre/components/create-genre-form';
 
 export function CreateEntriesPage() {
   return (
@@ -28,7 +29,7 @@ export function CreateEntriesPage() {
             value: 'genre',
             label: 'Genre',
             title: 'Create Genre',
-            content: <></>
+            content: <CreateGenreForm />
           },
         ]}
       />
