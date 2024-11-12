@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from app.apps.book.views import BookViewSet
+from src.apps.book.views import BookViewSet
 
 router = routers.DefaultRouter()
 router.register(r'books', BookViewSet)

@@ -1,10 +1,10 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
-from app.apps.book.models import Book
-from app.apps.author.models import Author
-from app.apps.genre.models import Genre
-from app.apps.author.serializers import AuthorSerializer
-from app.apps.genre.serializers import GenreSerializer
+from src.apps.book.models import Book
+from src.apps.author.models import Author
+from src.apps.genre.models import Genre
+from src.apps.author.serializers import AuthorSerializer
+from src.apps.genre.serializers import GenreSerializer
 
 class GetBooksSerializer(ModelSerializer):
     author = AuthorSerializer()

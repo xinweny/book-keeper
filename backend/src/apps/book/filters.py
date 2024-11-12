@@ -1,6 +1,6 @@
 from django_filters import FilterSet, CharFilter, NumberFilter, DateFilter
 
-from app.apps.book.models import Book
+from src.apps.book.models import Book
 
 class BookFilter(FilterSet):
     title = CharFilter(lookup_expr='icontains')

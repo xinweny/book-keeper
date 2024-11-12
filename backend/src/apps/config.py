@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 class BookKeeperConfig(AppConfig):
-    name = 'app'
+    name = 'src'
     verbose_name = 'Book Keeper'

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.urls import include, path
 
-from app.apps.urls import router
+from src.apps.urls import router
 
 urlpatterns = [
     path(r'api/', include(router.urls)),

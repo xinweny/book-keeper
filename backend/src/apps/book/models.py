@@ -1,8 +1,8 @@
 from django.db.models import Model, CharField, DateField, ForeignKey, CASCADE
 from django.core.validators import RegexValidator
 
-from app.apps.author.models import Author
-from app.apps.genre.models import Genre
+from src.apps.author.models import Author
+from src.apps.genre.models import Genre
 
 # Table should have been named "Inventory"
 class Book(Model):

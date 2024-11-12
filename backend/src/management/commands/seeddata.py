@@ -3,9 +3,9 @@ from faker import Faker
 import random
 from datetime import date
 
-from app.apps.book.models import Book
-from app.apps.author.models import Author
-from app.apps.genre.models import Genre
+from src.apps.book.models import Book
+from src.apps.author.models import Author
+from src.apps.genre.models import Genre
 
 class Command(BaseCommand):
     help = 'Seed database with sample inventory data'

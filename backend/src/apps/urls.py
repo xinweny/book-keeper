@@ -1,8 +1,8 @@
 from rest_framework import routers
 
-from app.apps.book.urls import router as book_router
-from app.apps.author.urls import router as author_router
-from app.apps.genre.urls import router as genre_router
+from src.apps.book.urls import router as book_router
+from src.apps.author.urls import router as author_router
+from src.apps.genre.urls import router as genre_router
 
 router = routers.DefaultRouter()
 

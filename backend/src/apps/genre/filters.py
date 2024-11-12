@@ -1,6 +1,6 @@
 from django_filters import FilterSet, CharFilter
 
-from app.apps.genre.models import Genre
+from src.apps.genre.models import Genre
 
 class GenreFilter(FilterSet):
     name = CharFilter(lookup_expr='icontains', label='Name')
