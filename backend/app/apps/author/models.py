@@ -8,6 +8,7 @@ class Author(Model):
     last_name: CharField = CharField(max_length=100, blank=False)
 
     class Meta:
+        db_table = 'authors'
         constraints = [
             UniqueConstraint(
                 fields=('first_name', 'middle_name', 'last_name'),

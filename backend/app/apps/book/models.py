@@ -20,6 +20,9 @@ class Book(Model):
             ),
         ],
     )
+    
+    class Meta:
+        db_table = 'books'
 
     def clean(self):
         self.title = self.title.trim()
