@@ -3,7 +3,7 @@ import {
   createSerializer,
   parseAsString,
   parseAsInteger,
-  parseAsIsoDateTime,
+  parseAsIsoDate,
 } from 'nuqs';
 
 const parsers = {
@@ -11,8 +11,8 @@ const parsers = {
   authorId: parseAsInteger,
   genreId: parseAsInteger,
   isbn: parseAsString,
-  publicationDateFrom: parseAsIsoDateTime,
-  publicationDateTo: parseAsIsoDateTime,
+  publicationDateFrom: parseAsIsoDate,
+  publicationDateTo: parseAsIsoDate,
 };
 
 export const useGetBooksUrlParams = () => {
