@@ -17,12 +17,12 @@ export function InventoryPage() {
     <div>
       <div className="flex items-end justify-between flex-wrap gap-2 mb-2">
         <BookFiltersButton />
-        <ExportRowsDropdownMenu books={books} />
+        <div className="flex items-center gap-2">
+          <PaginationInfo totalCount={books.length} />
+          <ExportRowsDropdownMenu books={books} />
+        </div>
       </div>
-      <div>
-        <BooksTable books={books} />
-        <PaginationInfo totalCount={books.length} />
-      </div>
+      <BooksTable books={books} />
     </div>
   );
 }
