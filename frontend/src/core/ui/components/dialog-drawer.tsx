@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useMediaQuery } from '@/core/ui/hooks/use-media-query';
 
 import {
