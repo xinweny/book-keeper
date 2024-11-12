@@ -20,16 +20,16 @@ export function PaginationInfo({
             : 1
           }
         </span>
-        <span> - </span>
+        <span>{' - '}</span>
         <span className="font-bold">
           {pageSize
             ? ((page - 1) * pageSize) + currentCount
             : totalCount
           }
         </span>
-        <span> of </span>
+        <span>{' of '}</span>
         <span className="font-bold">{totalCount}</span>
-        <span> items</span>
+        <span>{` item${totalCount === 1 ? '' : 's'}`}</span>
       </span>
     </div>
   );
