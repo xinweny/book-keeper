@@ -43,7 +43,6 @@ export function CreateBookForm() {
       publication_date: format(data.publicationDate, 'yyyy-LL-dd'),
     });
     
-
     if (isSuccess) {
       toast.success('Book successfully created.');
       form.reset(defaultValues);

@@ -34,7 +34,6 @@ export function CreateAuthorForm() {
       last_name: data.lastName,
     });
     
-
     if (isSuccess) {
       toast.success('Author successfully created.');
       form.reset(defaultValues);
