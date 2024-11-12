@@ -16,7 +16,7 @@ export function GetBooksPage() {
 
   return (
     <div>
-      <div className="flex items-end justify-between flex-wrap gap-2 mb-2">
+      <div className="flex items-end justify-between flex-wrap gap-2 py-2 pt-0">
         <BookFiltersButton />
         <div className="flex items-center gap-2">
           <PaginationInfo totalCount={books.length} />

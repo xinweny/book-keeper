@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
-import { ColumnDef, RowSelectionState } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table';
 import ISBN from 'isbn3';
 
 import { GetBooksResponse } from '../types/get-books-response';

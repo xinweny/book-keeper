@@ -20,13 +20,13 @@ export function CreateEntriesPage() {
             value: 'author',
             label: 'Author',
             title: 'Create Author',
-            content: <CreateBookForm />
+            content: <></>
           },
           {
             value: 'genre',
             label: 'Genre',
             title: 'Create Genre',
-            content: <CreateBookForm />
+            content: <></>
           },
         ]}
       />

@@ -31,13 +31,17 @@ export function TabPanels({
     <Tabs defaultValue={defaultValue} className="w-full">
       <TabsList className="flex gap-2">
         {panels.map(({ value, label }) => (
-          <TabsTrigger value={value} className="flex-grow">
+          <TabsTrigger
+            key={value}
+            value={value}
+            className="flex-grow"
+          >
             {label}
           </TabsTrigger>
         ))}
       </TabsList>
       {panels.map(({ value, title, description, content }) => (
-        <TabsContent value={value}>
+        <TabsContent key={value} value={value}>
           <Card>
             <CardHeader>
               <CardTitle>{title}</CardTitle>

@@ -13,7 +13,7 @@ export function BookFiltersButton() {
   const [params] = useGetBooksUrlParams();
   const [open, setOpen] = useState<boolean>(false);
 
-  const hasNoFilters = Object.entries(params).reduce((prev, [k, v]) => prev && v == null, true);
+  const hasNoFilters = Object.entries(params).reduce((prev, [, v]) => prev && v == null, true);
 
   return (
     <DialogDrawer
