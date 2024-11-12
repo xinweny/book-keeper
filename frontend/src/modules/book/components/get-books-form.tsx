@@ -17,7 +17,13 @@ import { InputGenreSelect } from '@/modules/genre/components/input-genre-select'
 import { ResetButton } from '@/core/form/components/reset-button';
 import { SubmitButton } from '@/core/form/components/submit-button';
 
-export function GetBooksForm() {
+interface GetBooksFormProps {
+  onSubmitted?: () => void;
+}
+
+export function GetBooksForm({
+  onSubmitted,
+}: GetBooksFormProps) {
   const { refetch } = useGetBooksQuery();
   const [params, setParams] = useGetBooksUrlParams();
 
@@ -46,6 +52,8 @@ export function GetBooksForm() {
     });
 
     await refetch();
+
+    if (onSubmitted) onSubmitted();
   };
 
   return (

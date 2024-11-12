@@ -24,6 +24,8 @@ interface DialogDrawerProps {
   title: string;
   description?: string;
   children: React.ReactNode;
+  open: boolean;
+  onOpenChange: (value: boolean) => void;
 }
 
 export function DialogDrawer({
@@ -31,13 +33,14 @@ export function DialogDrawer({
   title,
   description,
   children,
+  open,
+  onOpenChange,
 }: DialogDrawerProps) {
-  const [open, setOpen] = useState<boolean>(false);
   const isDesktop = useMediaQuery('md');
 
   return isDesktop
     ? (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
           {trigger}
         </DialogTrigger>
@@ -55,7 +58,7 @@ export function DialogDrawer({
       </Dialog>
     )
     : (
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerTrigger asChild>
           {trigger}
         </DrawerTrigger>
