@@ -52,4 +52,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-ENTRYPOINT ["HOSTNAME='0.0.0.0'", "node", "server.js"]
+ENV HOSTNAME "0.0.0.0"
+
+ENTRYPOINT ["node", "server.js"]
