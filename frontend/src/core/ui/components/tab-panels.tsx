@@ -21,14 +21,16 @@ interface TabPanelsProps {
     description?: string;
     content: React.ReactNode;
   }[];
+  className?: string;
 }
 
 export function TabPanels({
   defaultValue,
   panels,
+  className,
 }: TabPanelsProps) {
   return (
-    <Tabs defaultValue={defaultValue} className="w-full">
+    <Tabs defaultValue={defaultValue} className={className}>
       <TabsList className="flex gap-2">
         {panels.map(({ value, label }) => (
           <TabsTrigger
