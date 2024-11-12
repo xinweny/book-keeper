@@ -1,6 +1,5 @@
 'use client';
 
-import Head from 'next/head';
 import localFont from 'next/font/local';
 
 import { AppLayout } from '@/core/ui/layouts/app-layout';
@@ -25,10 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <title>Book Keeper</title>
         <meta name="description" content="Take home assignment for a book inventory management app" />
-      </Head>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
