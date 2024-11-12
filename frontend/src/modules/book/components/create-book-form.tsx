@@ -5,6 +5,8 @@ import ISBN from 'isbn3';
 
 import { CreateBookSchema, createBookSchemaResolver } from '../schema/create-book-schema';
 
+import { handleServerError } from '@/core/form/utils/handle-server-error';
+
 import { useCreateBookMutation } from '../hooks/use-create-book-mutation';
 
 import { Form } from '@/core/form/components/form';
@@ -31,6 +33,19 @@ export function CreateBookForm() {
       toast.success('Book successfully created.');
       form.reset(defaultValues);
     },
+    onError: (error) => {
+      handleServerError<CreateBookSchema>({
+        error,
+        setError: form.setError,
+        fieldMap: {
+          title: 'title',
+          author: 'authorId',
+          genre: 'genreId',
+          isbn: 'isbn',
+          publication_date: 'publicationDate',
+        },
+      });
+    }
   });
 
   const form = useForm<CreateBookSchema>({

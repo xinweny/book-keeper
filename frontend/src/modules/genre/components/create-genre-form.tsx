@@ -30,8 +30,12 @@ export function CreateGenreForm() {
       form.reset(defaultValues);
     },
     onError: (error) => {
-      handleServerError<CreateGenreSchema>(error, form.setError, {
-        name: 'name',
+      handleServerError<CreateGenreSchema>({
+        error,
+        setError: form.setError,
+        fieldMap: {
+          name: 'name',
+        },
       });
     }
   });

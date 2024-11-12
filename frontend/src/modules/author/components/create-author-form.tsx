@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 
 import { CreateAuthorSchema, createAuthorSchemaResolver } from '../schema/create-author-schema';
 
+import { handleServerError } from '@/core/form/utils/handle-server-error';
+
 import { useCreateAuthorMutation } from '../hooks/use-create-author-mutation';
 
 import { Form } from '@/core/form/components/form';
@@ -24,6 +26,17 @@ export function CreateAuthorForm() {
       toast.success('Author successfully created.');
       form.reset(defaultValues);
     },
+    onError: (error) => {
+      handleServerError<CreateAuthorSchema>({
+        error,
+        setError: form.setError,
+        fieldMap: {
+          first_name: 'firstName',
+          middle_name: 'middleName',
+          last_name: 'lastName',
+        },
+      });
+    }
   });
 
   const form = useForm<CreateAuthorSchema>({
