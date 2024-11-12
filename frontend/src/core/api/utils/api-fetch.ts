@@ -1,8 +1,14 @@
+import { ServerError } from '../types/server-error';
+
 interface ApiRequestInit extends RequestInit {
   body: any;
 }
 
-export const apiFetch = async <T>(path: string, req?: ApiRequestInit) => {
+export const apiFetch = async <T>(
+  path: string,
+  req?: ApiRequestInit,
+  errorMessage?: string
+) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/${path}`,
     req
@@ -17,7 +23,12 @@ export const apiFetch = async <T>(path: string, req?: ApiRequestInit) => {
       : undefined
   );
 
-  const data = res.json() as T | undefined;
+  const data = await res.json() as T | undefined;
+
+  if (!res.ok) throw new ServerError({
+    message: errorMessage,
+    data: data as Record<string, string[]>,
+  });
 
   return data;
 };

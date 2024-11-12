@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 
 import { CreateGenreSchema, createGenreSchemaResolver } from '../schema/create-genre-schema';
 
+import { handleServerError } from '@/core/form/utils/handle-server-error';
+
 import { useCreateGenreMutation } from '../hooks/use-create-genre-mutation';
 
 import { Form } from '@/core/form/components/form';
@@ -15,18 +17,23 @@ const defaultValues = {
 };
 
 export function CreateGenreForm() {
+  const form = useForm<CreateGenreSchema>({
+    defaultValues,
+    resolver: createGenreSchemaResolver,
+  });
+
   const {
     mutateAsync: createGenre,
   } = useCreateGenreMutation({
     onSuccess: () => {
-      toast.success('Book successfully created.');
+      toast.success('Genre successfully created.');
       form.reset(defaultValues);
     },
-  });
-
-  const form = useForm<CreateGenreSchema>({
-    defaultValues,
-    resolver: createGenreSchemaResolver,
+    onError: (error) => {
+      handleServerError<CreateGenreSchema>(error, form.setError, {
+        name: 'name',
+      });
+    }
   });
 
   const onSubmit = async (data: CreateGenreSchema) => {
