@@ -3,7 +3,7 @@ import ISBN from 'isbn3';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const getBooksSchema = z.object({
-  title: z.optional(z.string()),
+  title: z.optional(z.literal('').or(z.string())),
   authorId: z.optional(z.number().gt(0)),
   genreId: z.optional(z.number().gt(0)),
   isbn: z.optional(z

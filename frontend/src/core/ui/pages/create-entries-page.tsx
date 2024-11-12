@@ -6,8 +6,9 @@ import { CreateBookForm } from '@/modules/book/components/create-book-form';
 
 export function CreateEntriesPage() {
   return (
-    <div>
+    <div className="flex items-center justify-center">
       <TabPanels
+        className="w-full"
         defaultValue="book"
         panels={[
           {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import ISBN from 'isbn3';
 
 import { GetBooksSchema, getBooksSchemaResolver } from '../schema/get-books-schema';
 
@@ -44,7 +45,9 @@ export function GetBooksForm({
   const onSubmit = async (data: GetBooksSchema) => {
     await setParams({
       title: data.title || null,
-      isbn: data.isbn || null,
+      isbn: data.isbn
+        ? ISBN.asIsbn13(data.isbn)
+        : null,
       authorId: data.authorId || null,
       genreId: data.genreId || null,
       publicationDateFrom: data.publicationDate.from || null,
@@ -93,7 +96,7 @@ export function GetBooksForm({
       />
       <FormField
         name="isbn"
-        label="ISBN13"
+        label="ISBN"
         render={({ value, onChange }) => (
           <Input
             value={value}
