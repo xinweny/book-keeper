@@ -36,16 +36,14 @@ export function GetBooksForm() {
   });
 
   const onSubmit = async (data: GetBooksSchema) => {
-    setParams({
-      title: data.title,
-      isbn: data.isbn,
-      authorId: data.authorId,
-      genreId: data.genreId,
-      publicationDateFrom: data.publicationDate.from,
-      publicationDateTo: data.publicationDate.to,
+    await setParams({
+      title: data.title || null,
+      isbn: data.isbn || null,
+      authorId: data.authorId || null,
+      genreId: data.genreId || null,
+      publicationDateFrom: data.publicationDate.from || null,
+      publicationDateTo: data.publicationDate.to || null,
     });
-
-    console.log('submitted');
 
     await refetch();
   };

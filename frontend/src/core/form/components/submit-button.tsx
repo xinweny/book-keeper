@@ -12,7 +12,7 @@ export function SubmitButton({
     <Button
       {...props}
       type="submit"
-      disabled={!formState.isDirty || formState.isSubmitting}
+      disabled={formState.isSubmitting}
     >
       {children}
     </Button>
