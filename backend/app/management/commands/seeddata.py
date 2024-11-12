@@ -11,7 +11,7 @@ class Command(BaseCommand):
     help = 'Seed database with sample inventory data'
     
     def handle(self, *args, **options):
-        self.stdout.write(self.style.SUCCESS('Seeding database...'))
+        self.stdout.write('Seeding database...')
         
         fake = Faker()
         
