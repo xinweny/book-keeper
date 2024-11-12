@@ -1,14 +1,16 @@
 FROM python:3.13-slim AS base
 
-ENV POETRY_HOME=/opt/poetry
-ENV PATH=${POETRY_HOME}/bin:${PATH}
-
 RUN apt-get update \
     && apt-get install --no-install-recommends -y curl libpq-dev python3-dev gcc \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL https://install.python-poetry.org | python3 - && poetry --version
+RUN pip install poetry
+
+ENV POETRY_NO_INTERACTION 1
+ENV POETRY_VIRTUALENVS_IN_PROJECT 1
+ENV POETRY_VIRTUALENVS_CREATE 1
+ENV POETRY_CACHE_DIR /tmp/poetry_cache
 
 FROM base AS builder
 
@@ -16,8 +18,7 @@ WORKDIR /app
 
 COPY poetry.lock pyproject.toml ./
 
-RUN poetry config virtualenvs.in-project true
-RUN poetry install --only main --no-interaction
+RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 
 FROM base AS runner
 
@@ -26,11 +27,11 @@ COPY --from=builder /app/.venv/ /app/.venv/
 
 COPY . /app
 
-EXPOSE 8000
-
 FROM runner AS development
 
 WORKDIR /app
+
+EXPOSE 8000
 
 ENTRYPOINT ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
 
@@ -51,5 +52,7 @@ RUN useradd -u ${uid} -g ${group} -s /bin/sh -m ${user}
 RUN chown -R ${uid}:${gid} /app
 
 USER ${uid}:${gid}
+
+EXPOSE 8000
 
 ENTRYPOINT ["poetry", "run", "gunicorn", "-c",  "gunicorn.conf.py"]

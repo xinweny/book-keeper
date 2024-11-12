@@ -24,14 +24,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-EXPOSE 3000
-
 RUN npm run build
 
 # Development image
 FROM builder AS development
 
 WORKDIR /app
+
+EXPOSE 3000
 
 ENTRYPOINT ["npm", "run", "dev"]
 
@@ -53,5 +53,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 USER nextjs
 
 ENV HOSTNAME "0.0.0.0"
+
+EXPOSE 3000
 
 ENTRYPOINT ["node", "server.js"]
