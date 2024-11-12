@@ -41,10 +41,14 @@ export function FormField<T extends FieldValues>({
       render={({ field }) => (
         <FormItem className={cn('flex flex-col', className)}>
           {label && (
-            <FormLabel className="font-semibold">{label}</FormLabel>
+            <FormLabel className="font-semibold">
+              {label}
+            </FormLabel>
           )}
           {description && (
-            <FormDescription>{description}</FormDescription>
+            <FormDescription>
+              {description}
+            </FormDescription>
           )}
           <FormMessage />
           <FormControl>
