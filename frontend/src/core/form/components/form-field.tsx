@@ -23,6 +23,7 @@ interface FormFieldProps<T extends FieldValues> {
   label?: string;
   description?: string;
   className?: string;
+  required?: boolean;
 }
 
 export function FormField<T extends FieldValues>({
@@ -31,6 +32,7 @@ export function FormField<T extends FieldValues>({
   render,
   description,
   className,
+  required = false,
 }: FormFieldProps<T>) {
   const { control } = useFormContext<T>();
 
@@ -42,7 +44,7 @@ export function FormField<T extends FieldValues>({
         <FormItem className={cn('flex flex-col', className)}>
           {label && (
             <FormLabel className="font-semibold">
-              {label}
+              {`${label}${required ? ' *' : ''}`}
             </FormLabel>
           )}
           {description && (

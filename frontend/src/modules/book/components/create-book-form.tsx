@@ -59,8 +59,10 @@ export function CreateBookForm() {
           <Input
             value={value}
             onChange={onChange}
+            maxLength={255}
           />
         )}
+        required
       />
       <FormField
         name="authorId"
@@ -71,6 +73,7 @@ export function CreateBookForm() {
             onSelect={onChange}
           />
         )}
+        required
       />
       <FormField
         name="genreId"
@@ -81,6 +84,7 @@ export function CreateBookForm() {
             onSelect={onChange}
           />
         )}
+        required
       />
       <FormField
         name="isbn"
@@ -93,6 +97,7 @@ export function CreateBookForm() {
             placeholder='978-1-4028-9462-6'
           />
         )}
+        required
       />
       <FormField
         name="publicationDate"
@@ -104,6 +109,7 @@ export function CreateBookForm() {
             onChange={onChange}
           />
         )}
+        required
       />
       <SubmitButton />
     </Form>
