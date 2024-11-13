@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from os import environ
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 
 load_dotenv()
 
@@ -82,14 +83,16 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+db_url = urlparse(environ.get('DATABASE_URL'))
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': environ.get('POSTGRES_NAME'),
-        'USER': environ.get('POSTGRES_USER'),
-        'PASSWORD': environ.get('POSTGRES_PASSWORD'),
-        'HOST': environ.get('POSTGRES_HOST'),
-        'PORT': environ.get('POSTGRES_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': db_url.path.replace('/', ''),
+        'USER': db_url.username,
+        'PASSWORD': db_url.password,
+        'HOST': db_url.hostname,
+        'PORT': 5432,
     }
 }
 
