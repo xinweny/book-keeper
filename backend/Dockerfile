@@ -6,14 +6,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Configure Poetry
 ENV POETRY_HOME=/opt/poetry
 ENV PATH=${POETRY_HOME}/bin:${PATH}
 
-RUN curl -sSL https://install.python-poetry.org | python3 - && poetry --version
-
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV POETRY_NO_INTERACTION=1
-ENV POETRY_VIRTUALENVS_IN_PROJECT=1
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 FROM base AS builder
 
@@ -21,7 +18,10 @@ WORKDIR /app
 
 COPY poetry.lock pyproject.toml ./
 
-RUN poetry install --no-root
+RUN poetry config virtualenvs.in-project true
+RUN poetry install --only main --no-interaction
+
+RUN poetry install
 
 FROM base AS runner
 
@@ -49,4 +49,4 @@ ENV ENVIRONMENT=production
 
 EXPOSE 8000
 
-ENTRYPOINT ["poetry", "run", "gunicorn", "main:src"]
+ENTRYPOINT ["poetry", "run", "gunicorn", "app.wsgi:application", "--bind=0.0.0.0:8000"]

@@ -13,9 +13,7 @@ services:
     image: book-keeper/api
     build:
       context: ./backend
-      args:
-        CLIENT_URL: http://frontend:3000
-    entrypoint: poetry run python manage.py runserver
+    entrypoint: poetry run python manage.py runserver 0.0.0.0:8000
     environment:
       - ENVIRONMENT=development
       - DEBUG=True
@@ -25,8 +23,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
-    volumes:
-      - ./backend:/code
+      - CLIENT_URL=http://frontend:3000
     ports:
       - 8000:8000
     depends_on:
