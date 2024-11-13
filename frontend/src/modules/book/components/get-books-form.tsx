@@ -6,7 +6,6 @@ import ISBN from 'isbn3';
 import { GetBooksSchema, getBooksSchemaResolver } from '../schema/get-books-schema';
 
 import { useGetBooksUrlParams } from '../hooks/use-get-books-url-params';
-import { useGetBooksQuery } from '../hooks/use-get-books-query';
 
 import { Form } from '@/core/form/components/form';
 import { FormField } from '@/core/form/components/form-field';
@@ -25,7 +24,6 @@ interface GetBooksFormProps {
 export function GetBooksForm({
   onSubmitted,
 }: GetBooksFormProps) {
-  const { refetch } = useGetBooksQuery();
   const [params, setParams] = useGetBooksUrlParams();
 
   const form = useForm<GetBooksSchema>({
@@ -53,8 +51,6 @@ export function GetBooksForm({
       publicationDateFrom: data.publicationDate.from || null,
       publicationDateTo: data.publicationDate.to || null,
     });
-
-    await refetch();
 
     if (onSubmitted) onSubmitted();
   };
