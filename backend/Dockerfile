@@ -52,4 +52,4 @@ ENV DEBUG=False
 
 EXPOSE 8000
 
-ENTRYPOINT ["poetry", "run", "gunicorn", "app.wsgi:application", "--bind=0.0.0.0:8000"]
+ENTRYPOINT ["poetry", "run", "gunicorn", "src.wsgi:application", "--bind=0.0.0.0:8000"]
