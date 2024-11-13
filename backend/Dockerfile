@@ -1,5 +1,7 @@
 FROM python:3.13-slim AS base
 
+ENV PYTHONUNBUFFERED=1
+
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
     curl libpq-dev python3-dev gcc \

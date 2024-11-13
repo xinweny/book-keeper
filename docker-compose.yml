@@ -23,7 +23,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
-      - CLIENT_URL=http://frontend:3000
+      - CLIENT_URL=http://localhost:3000
     ports:
       - 8000:8000
     depends_on:
