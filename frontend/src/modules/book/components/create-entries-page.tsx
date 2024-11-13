@@ -1,6 +1,6 @@
 'use client';
 
-import { TabPanels } from '../components/tab-panels';
+import { TabPanels } from '../../../core/ui/components/tab-panels';
 
 import { CreateBookForm } from '@/modules/book/components/create-book-form';
 import { CreateAuthorForm } from '@/modules/author/components/create-author-form';

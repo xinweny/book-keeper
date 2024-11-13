@@ -6,15 +6,18 @@ export function SubmitButton({
   children = 'Submit',
   ...props
 }: ButtonProps) {
-  const { formState } = useFormContext();
+  const { formState: { isSubmitting } } = useFormContext();
 
   return (
     <Button
       {...props}
       type="submit"
-      disabled={formState.isSubmitting}
+      disabled={isSubmitting}
     >
-      {children}
+      {isSubmitting
+        ? 'Submitting...'
+        : children
+      }
     </Button>
   );
 }

@@ -1,3 +1,3 @@
-import { GetBooksPage } from '@/core/ui/pages/get-books-page';
+import { GetBooksPage } from '@/modules/book/components/get-books-page';
 
 export default GetBooksPage;

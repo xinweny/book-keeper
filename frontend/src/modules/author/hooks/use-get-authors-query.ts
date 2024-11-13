@@ -9,8 +9,10 @@ import { useGetAuthorsUrlParams, serializeGetAuthorsUrlParams } from './use-get-
 export const useGetAuthorsQuery = () => {
   const [params] = useGetAuthorsUrlParams();
 
+  const url = serializeGetAuthorsUrlParams('authors', params);
+
   return useQuery({
-    queryKey: ['authors'],
-    queryFn: () => apiFetch<GetAuthorsResponse[]>(serializeGetAuthorsUrlParams('authors', params)),
+    queryKey: ['authors', url],
+    queryFn: () => apiFetch<GetAuthorsResponse[]>(url),
   });
 };

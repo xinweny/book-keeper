@@ -9,8 +9,10 @@ import { useGetGenresUrlParams, serializeGetGenresUrlParams } from './use-get-ge
 export const useGetGenresQuery = () => {
   const [params] = useGetGenresUrlParams();
 
+  const url = serializeGetGenresUrlParams('genres', params);
+
   return useQuery({
-    queryKey: ['genres'],
-    queryFn: () => apiFetch<GetGenresResponse[]>(serializeGetGenresUrlParams('genres', params)),
+    queryKey: ['genres', url],
+    queryFn: () => apiFetch<GetGenresResponse[]>(url),
   });
 };

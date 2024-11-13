@@ -1,3 +1,3 @@
-import { CreateEntriesPage } from '@/core/ui/pages/create-entries-page';
+import { CreateEntriesPage } from '@/modules/book/components/create-entries-page';
 
 export default CreateEntriesPage;

@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import { Suspense } from 'react';
 
-import { Header } from '../components/header';
-import { Footer } from '../components/footer';
+import { Header } from './header';
+import { Footer } from './footer';
 
 interface AppLayoutProps {
   children: React.ReactNode;

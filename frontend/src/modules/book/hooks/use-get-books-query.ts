@@ -9,8 +9,10 @@ import { serializeGetBooksUrlParams, useGetBooksUrlParams } from './use-get-book
 export const useGetBooksQuery = () => {
   const [params] = useGetBooksUrlParams();
 
+  const url = serializeGetBooksUrlParams('books', params);
+
   return useQuery({
-    queryKey: ['books'],
-    queryFn: () => apiFetch<GetBooksResponse[]>(serializeGetBooksUrlParams('books', params)),
+    queryKey: ['books', url],
+    queryFn: () => apiFetch<GetBooksResponse[]>(url),
   });
 };

@@ -4,6 +4,7 @@ import {
   parseAsString,
   parseAsInteger,
   parseAsIsoDate,
+  inferParserType,
 } from 'nuqs';
 
 const parsers = {
@@ -27,3 +28,5 @@ export const serializeGetBooksUrlParams = createSerializer(parsers, {
     publicationDateTo: 'publication_date_to',
   },
 });
+
+export type GetBooksUrlParams = inferParserType<typeof parsers>;
