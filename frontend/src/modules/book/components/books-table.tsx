@@ -9,15 +9,18 @@ import { DataTable } from '@/core/ui/components/data-table';
 
 interface BooksTableProps {
   books: GetBooksResponse[];
+  isLoading?: boolean;
 }
 
 export function BooksTable({
   books,
+  isLoading,
 }: BooksTableProps) {
   return (
     <DataTable
       data={books}
       columns={columns}
+      isLoading={isLoading}
     />
   );
 }

@@ -10,7 +10,7 @@ import { ExportRowsDropdownMenu } from '@/modules/book/components/export-rows-dr
 import { BookFiltersButton } from '@/modules/book/components/book-filters-button';
 
 export function GetBooksPage() {
-  const { data } = useGetBooksQuery();
+  const { data, isLoading } = useGetBooksQuery();
 
   const books = data || [];
 
@@ -23,7 +23,7 @@ export function GetBooksPage() {
           <ExportRowsDropdownMenu books={books} />
         </div>
       </div>
-      <BooksTable books={books} />
+      <BooksTable books={books} isLoading={isLoading} />
     </div>
   );
 }
