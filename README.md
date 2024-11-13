@@ -2,7 +2,7 @@
 
 A take-home assignment for a book inventory management application, built as a full-stack web application in Python and Typescript.
 
-Check out the live demo [here](http://TODO)! 👈
+Check out the live demo [here](https://xinweny.github.io/book-keeper/)! 👈
 
 ## Features
 
