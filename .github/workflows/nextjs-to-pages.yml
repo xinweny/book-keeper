@@ -69,7 +69,7 @@ jobs:
   # Deployment job
   deploy:
     environment:
-      name: github-pages
+      name: production
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
@@ -77,3 +77,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        env:
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
