@@ -1,17 +1,19 @@
-# Book Keeper 📚
+# 📚 Book Keeper 📚
 
-A take-home assignment to build a full-stack web application for book inventory management, built in Python and Typescript.
+A take-home assignment for a book inventory management application, built as a full-stack web application in Python and Typescript.
 
 Check out the live demo [here](http://TODO)! 👈
 
 ## Features
 
-- **Create** books, authors and genres
-- **Filter** books based on title, author, genre, isbn and publication date range
-- **List** display of books in a data table
-- **Export** filtered rows to CSV and JSON formats
+- **CREATE** books, authors and genres
+- **FILTER** books based on title, author, genre, isbn and publication date range
+- **LIST** books to be displayed in a data table
+- **EXPORT** filtered rows to CSV and JSON formats
 
 ## Project structure
+
+I implemented both horizontal and vertical slice organization, dividing both the frontend and backend folders into modules that represents a distinct feature - within each module, code is divided by their roles (layers). I find that this provides a good balance between modularity, flexibility and ease of understanding as projects scale.
 
 ```sh
 .
@@ -42,7 +44,7 @@ Check out the live demo [here](http://TODO)! 👈
         └── styles
 ```
 
-### Frontend
+### Frontend directories
 
 - `/app`: Next.js App directory whose folder structure represents the app route structure
 - `/assets`: contains media files such as fonts and icons
@@ -52,20 +54,22 @@ Check out the live demo [here](http://TODO)! 👈
 - `/modules`: feature-based modules mirroring the API endpoints `author`, `book` and `genre`, with their respective `/components`, `/hooks`, `/types` and `/schemas`
 - `/styles`: for global CSS styles
 
-### Backend
+### Backend directories
 
 - `/apps`: contains the API endpoint folders `author`, `book` and `genre`, with their respective `models.py`, `serializers.py`, `filters.py`, `urls.py` (routers) and  `views.py` (controllers)
 - `/management/commands`: contains custom command definitions to be used by `django-admin`, such as `seed-data`
 - `/migrations`: migration files for creating/updating database schema
 
-## Technology design and stack
+## Design and stack
 
+I implemented the frontend and backend in different languages primarily for learning and practice purposes - I am much more familiar in TypeScript and JavaScript for full-stack web development than I am in Python (where my experiences have been in data analysis and visualization).
 
+The reasoning for my choices for the libraries used in this project are summarized below.
 
-### Frontend
+### Frontend technologies
 
 - [React](https://react.dev/)
-- [Next.js](https://nextjs.org/)
+- [Next.js](https://nextjs.org/) - Using only SSG to create a Single Page Application to allow myself to test new technologies on the backend
 - [Nuqs](https://nuqs.47ng.com/) - Cleaner state management through URL params, useful for filtering
 - [Tanstack Query](https://tanstack.com/query/latest) - Ideal for SPAs with client-side fetching and caching to control fetching states and reduce unnecessary requests to the API
 - [React Hook Form](https://react-hook-form.com/) - For complex form state management, integration with `zod` for client-side form validation as well as server error integration
@@ -76,15 +80,15 @@ Check out the live demo [here](http://TODO)! 👈
 - [Lucide React](https://lucide.dev/) - Open-source icon library for logos and improving UI/UX
 - [date-fns](https://date-fns.org/) - For formatting user-friendly `Date` strings, and ensuring correct format for database entry
 
-### Backend
+### Backend technologies
 
-- [Django](https://www.djangoproject.com/)
+- [Django](https://www.djangoproject.com/) - A framework I've been wanting to learn for a while now
 - [Django REST framework](https://www.django-rest-framework.org/) - Suitable for building REST APIs on Django to be consumed, allowing decoupling the frontend from Django
 - [django-filter](https://django-filter.readthedocs.io/en/stable/) - Quickly build simple and flexible, useful for  1:1 filtering on model fields
 
 ### Database
 
-- Postgresql
+- [Postgresql](https://www.postgresql.org/)
 
 ## Setup instructions
 
@@ -163,3 +167,4 @@ This small project was an excellent opportunity for me to pick up and practice s
 - Fully fledging out CRUD operations for books, authors and genres
 - Better UI for loading states and error handling
 - Test files!
+- Although Django's ORM is very comprehensive, it would be good in the future to get practice writing raw SQL
