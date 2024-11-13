@@ -48,6 +48,7 @@ RUN chown -R ${uid}:${gid} /app
 USER ${uid}:${gid}
 
 ENV ENVIRONMENT=production
+ENV DEBUG=False
 
 EXPOSE 8000
 
