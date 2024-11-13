@@ -1,7 +1,6 @@
 import { formatFullName } from '../utils/format-full-name';
 
 import { useGetAuthorsQuery } from '../hooks/use-get-authors-query';
-import { useGetAuthorsUrlParams } from '../hooks/use-get-authors-url-params';
 
 import { InputSelectCommand } from '@/core/form/components/input-select-command';
 
@@ -14,8 +13,6 @@ export function InputAuthorSelect({
   value,
   onSelect,
 }: InputAuthorSelectProps) {
-  const [{ authorName }, setQuery] = useGetAuthorsUrlParams();
-
   const { data, isLoading } = useGetAuthorsQuery();
 
   const options = (data || []).map(({ id, first_name, middle_name, last_name }) => ({
@@ -30,8 +27,6 @@ export function InputAuthorSelect({
       value={value}
       onSelect={onSelect}
       label="Select Author"
-      query={authorName}
-      setQuery={value => { setQuery({ authorName: value }); }}
       placeholder="Search Authors"
       isLoading={isLoading}
     />

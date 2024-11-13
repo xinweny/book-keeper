@@ -34,8 +34,6 @@ interface InputSelectCommandProps<T> {
   label: string;
   isLoading?: boolean;
   emptyPlaceholder?: React.ReactNode;
-  query: string;
-  setQuery: (value: string) => void;
 }
 
 export function InputSelectCommand<T extends FieldValues>({
@@ -46,10 +44,9 @@ export function InputSelectCommand<T extends FieldValues>({
   placeholder = 'Search',
   isLoading = false,
   emptyPlaceholder = 'No results found.',
-  query,
-  setQuery,
 }: InputSelectCommandProps<T>) {
   const [open, setOpen] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>();
 
   useEffect(() => {
     setQuery('');
@@ -93,7 +90,7 @@ export function InputSelectCommand<T extends FieldValues>({
               {options.map(({ value: v, label, key }) => (
                 <CommandItem
                   key={key}
-                  value={key}
+                  value={label}
                   onSelect={() => {
                     onSelect(value === v
                       ? undefined
@@ -108,7 +105,7 @@ export function InputSelectCommand<T extends FieldValues>({
                       value === v ? 'opacity-100' : 'opacity-0'
                     )}
                   />
-                  {label}
+                  <span>{label}</span>
                 </CommandItem>
               ))}
             </CommandGroup>

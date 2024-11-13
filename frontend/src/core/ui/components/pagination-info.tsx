@@ -13,7 +13,7 @@ export function PaginationInfo({
 }: PaginationInfoProps) {
   return (
     <div className="text-right">
-      <span className="text-sm text-right py-2">
+      <span className="text-sm text-right py-2 text-nowrap">
         <span className="font-bold">
           {pageSize
             ? ((page - 1) * pageSize) + 1

@@ -66,7 +66,7 @@ export function BookFilters() {
   }[]
 
   return (
-    <div className="flex items-center flex-wrap gap-1">
+    <div className="hidden md:flex items-center flex-wrap gap-1">
       {filters.map(({ show, label, value, reset }) => (show &&
         <FilterBadge
           key={label}
