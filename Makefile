@@ -4,8 +4,6 @@ ROOT_DIR :=  $(dir $(ROOT_PATH))
 BACKEND_DIR = $(ROOT_DIR)/backend
 FRONTEND_DIR = $(ROOT_DIR)/frontend
 
-MANAGE_PY = $(BACKEND_DIR)/manage.py
-
 create-dotenv-files:
 	cp .env.template .env && \
 	cd $(FRONTEND_DIR) && cp .env.template .env \
@@ -27,13 +25,13 @@ init-backend:
 	cd $(BACKEND_DIR) && poetry install
 
 dev-backend:
-	poetry run python ${MANAGE_PY} runserver
+	cd $(BACKEND_DIR) && poetry run python manage.py runserver
 
 prod-backend:
 	cd $(BACKEND_DIR) && poetry run gunicorn src.wsgi:application
 
 migrate-db:
-	poetry run python ${MANAGE_PY} migrate
+	cd $(BACKEND_DIR) && poetry run python manage.py migrate
 
 seed-db:
-	poetry run python ${MANAGE_PY} seeddata
+	cd $(BACKEND_DIR) && poetry run python manage.py seeddata
