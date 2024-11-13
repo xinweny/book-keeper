@@ -4,6 +4,8 @@ A take-home assignment for a book inventory management application, built as a f
 
 Check out the live demo [here](https://xinweny.github.io/book-keeper/)! 👈
 
+> **_NOTE:_**  As the application is deployed on free resources, the initial data load may take some time (up to a minute).
+
 ## Features
 
 - **CREATE** books, authors and genres
